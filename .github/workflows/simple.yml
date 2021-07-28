@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - name: eccho a string
-        run: echo "Hello World"
+        run: ecccho "Hello World"
       - name: mutiline script
         run: |
           node -v
