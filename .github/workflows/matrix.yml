@@ -14,9 +14,9 @@ jobs:
               is_ubuntu_8: "true"
           exclude: 
             - os: ubuntu-latest
-              node-version: 6
+              node_version: 6
             - os: macos-latest
-              node-version: 8
+              node_version: 8
         #max-parallel: 0  actions will try and optomize, but if we want to limit can be specified
         fail-fast: true #if any step fail, fail all - if set to false, let them all run 
 
