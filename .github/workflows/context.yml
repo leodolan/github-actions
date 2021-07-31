@@ -1,6 +1,6 @@
 name: Context Logging
 
-on: push
+on: [pull_request]
 
 jobs:
   functions:
@@ -15,12 +15,16 @@ jobs:
 
   one:
     runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+    timeout-minutes: 360 #longest amount of time the job can take before it is cancelled
     steps:
       - name: Dump GitHub context
         env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
+        continue-on-error: true #will continue other steps even if this step fails
       - name: Dump job context
+        if: failure() #will run even if previous step failed
         env:
           JOB_CONTEXT: ${{ toJSON(job) }}
         run: echo "$JOB_CONTEXT"
@@ -29,6 +33,7 @@ jobs:
           STEPS_CONTEXT: ${{ toJSON(steps) }}
         run: echo "$STEPS_CONTEXT"
       - name: Dump runner context
+        if: always() #will always run even if previous step failed
         env:
           RUNNER_CONTEXT: ${{ toJSON(runner) }}
         run: echo "$RUNNER_CONTEXT"
