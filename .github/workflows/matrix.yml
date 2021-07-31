@@ -9,7 +9,7 @@ jobs:
           os: [macos-latest, ubuntu-latest, windows-latest]
           node_version: [6,8,10]
           include: 
-            - os-version: ubuntu-latest
+            - os: ubuntu-latest
               node_version: 8
               is_ubuntu_8: "true"
           exclude: 
